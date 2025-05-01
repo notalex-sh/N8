@@ -1,0 +1,40 @@
+{
+    "Directories": [
+      "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+      "%ALLUSERSPROFILE%\\Microsoft\\Windows\\Start Menu\\Programs\\Startup",
+      "%USERPROFILE%\\AppData\\Local\\Temp",
+      "%WINDIR%\\Temp",
+      "%WINDIR%\\System32",
+      "%WINDIR%\\SysWOW64",
+      "%LOCALAPPDATA%\\Google\\Chrome\\User Data\\Default\\Extensions",
+      "%APPDATA%\\Mozilla\\Firefox\\Profiles\\*\\extensions",
+      "%ALLUSERSPROFILE%",
+      "%PUBLIC%",
+      "%USERPROFILE%\\Desktop",
+      "%USERPROFILE%\\Documents",
+      "%USERPROFILE%\\Downloads",
+      "%USERPROFILE%\\Pictures",
+      "%USERPROFILE%\\Videos"
+    ],
+    "Registries": [
+      "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+      "HKLM\\SYSTEM\\CurrentControlSet\\Services",
+      "HKCR\\exefile\\shell\\open\\command",
+      "HKLM\\Software\\Policies\\Microsoft\\Windows",
+      "HKCU\\Software\\Policies\\Microsoft\\Windows"
+    ],
+    "MonitoredDLLs": [
+      "ntdll.dll",
+      "kernel32.dll",
+      "advapi32.dll",
+      "user32.dll",
+      "ws2_32.dll",
+      "wininet.dll",
+      "ole32.dll",
+      "crypt32.dll",
+      "msvcrt.dll",
+      "wlbsctrl.dll"
+    ]
+  }
+  
