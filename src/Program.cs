@@ -35,7 +35,9 @@ namespace N8
 
             // Start the main controller
             var controller = new Controller();
-            controller.Start(Target);
+            controller.Start(Target)
+                .GetAwaiter()
+                .GetResult();
         }
     }
 }
