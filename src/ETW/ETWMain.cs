@@ -3,6 +3,14 @@ using Microsoft.Diagnostics.Tracing.Parsers;
 using Microsoft.Diagnostics.Tracing.Parsers.Kernel;
 using Microsoft.Diagnostics.Tracing.Session;
 using N8.Classes;
+using N8.Lists;
+
+/*
+Event types
+
+ProcessStart
+ProcessStop
+*/
 
 namespace N8.ETW
 {
@@ -25,16 +33,31 @@ namespace N8.ETW
                 session.EnableKernelProvider(KernelTraceEventParser.Keywords.Process);
                 session.Source.Kernel.ProcessStart += data =>
                 {
-                    var entry = new LogEntry(
-                        DateTime.Now,
-                        "ProcessStart",
-                        data.ProcessID,
-                        data.ProcessName,
-                        $"{data.ProcessID} spawned by PID={data.ParentID}.",
-                        data.ImageFileName
-                    );
+                    if (TrackedProcesses.PidList.Contains(data.ParentID))
+                    {
 
-                    LogWriter.WriteAsync(entry);
+                        TrackedProcesses.Add(
+                            new ProcessNode(
+                                data.ProcessID,
+                                data.ProcessName,
+                                "TODO",
+                                data.CommandLine,
+                                true
+                            )
+                        );
+
+
+                        var entry = new LogEntry(
+                            DateTime.Now,
+                            "ProcessStart",
+                            data.ProcessID,
+
+                            data.ProcessName,
+                            $"{data.ProcessID} spawned by PID={data.ParentID}.",
+                            data.ImageFileName
+                        );
+                        LogWriter.WriteAsync(entry);
+                    }
                 };
                 session.Source.Process();
                 LogWriter.Complete();
