@@ -84,10 +84,10 @@ The program starts the ETW session, launches your target, waits for it (and any 
 | **WMI queries** (event 5858)                | ✗ | ✓ |
 
 ## TODO
-
-[ ] Output file
-[ ] Capture command line args
-[ ] Capture process + file integrity
-[ ] API integration in analysis
-[ ] Make my code gooder
-[ ] other stuff i forgot about
+- [ ] Output file
+- [ ] Capture command line args
+- [ ] Capture process + file integrity
+- [ ] API integration in analysis
+- [ ] Policy file for alerts on sensitive activity
+- [ ] Make my code gooder
+- [ ] other stuff i forgot about
