@@ -7,13 +7,6 @@ using N8.Classes;
 using N8.Lists;
 using N8.Utilities;
 
-/*
-Event types
-
-ProcessStart
-ProcessStop
-*/
-
 namespace N8.ETW
 {
     public partial class ETWMonitor
