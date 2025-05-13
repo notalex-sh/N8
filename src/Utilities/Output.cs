@@ -31,7 +31,7 @@ namespace N8.Utilities
             WriteLineColor($"=== {title} ===", ConsoleColor.Cyan);
             foreach (var item in items.OrderBy(x => x))
             {
-                WriteColor("   [!] ", ConsoleColor.Blue);
+                WriteColor("   [!] ", ConsoleColor.Green);
                 WriteLineColor(item, ConsoleColor.White);
             }
             Console.WriteLine(); 

@@ -18,7 +18,7 @@ namespace N8.Controllers
             TrackedFiles.Add(target.path);
 #pragma warning restore CS8604 
 
-            // spinner and messages during execution, will probably move this to a separate function
+            // spinner and messages during execution
             Output.WriteColor("[*] Running Target ", ConsoleColor.Yellow);
             (int Left, int Top) SpinnerCords = Console.GetCursorPosition();
             Console.WriteLine("\n");

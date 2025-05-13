@@ -19,12 +19,25 @@ namespace N8.Enums
             ProcessStop,
             FileWrite,
             FileRead,
+            FileDelete,
             ImageLoad,
             TcpConnect,
             TcpSend,
             TcpRecv,
             UdpSend,
-            UdpRecv
+            UdpRecv,
+            RegistryCreate,
+            RegistryOpen,
+            RegistryDelete,
+            RegistrySetValue,
+            RegistryDeleteValue,
+            DnsQuery,
+            DnsResponse,
+            DriverLoad,
+            ServiceInstall,
+            ScheduledTaskRegister,
+            PipeCreate,
+            WmiQuery
         }
     }
 }

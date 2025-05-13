@@ -8,6 +8,8 @@ namespace N8
     {
         public static string? TargetPath { get; set; }
         public static Target? Target { get; set; }
+
+        public static bool Verbose { get; set; }
         static void Main(string[] args)
         {
             // Stop if not admin
@@ -26,6 +28,7 @@ namespace N8
             // Collect command-line input
             var options = ArgumentParser.ParsedOptions!;
             TargetPath = options.Target;
+            Verbose = options.Verbose;
 
 #pragma warning disable CS8604 // i dont know how this would be null tbh, if it is ill probably know about it because the program will break
             Target = new Target(TargetPath);
@@ -38,8 +41,6 @@ namespace N8
             controller.Start(Target)
                 .GetAwaiter()
                 .GetResult();
-
-            Console.WriteLine("\nDone!");
         }
     }
 }

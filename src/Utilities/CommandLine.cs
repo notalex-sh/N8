@@ -9,6 +9,9 @@ namespace N8.Utilities
     {
         [Option("target", Required = true, HelpText = "Path to executable being examined.")]
         public string? Target { get; set; }
+
+        [Option("verbose", Required = false, HelpText = "Enable verbose output.")]
+        public bool Verbose { get; set; } = false;
     }
 
     public static class ArgumentParser

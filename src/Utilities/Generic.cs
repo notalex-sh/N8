@@ -76,15 +76,50 @@ namespace N8.Utilities
         => IPAddress.IsLoopback(addr);
 
         // stuff for controller usage to display output from the execution
+        // todo ProcessTree
         public static void ExecutionSummary(LogAnalyser analyser)
         {
             Output.WriteLineColor("[*] Execution Summary\n", ConsoleColor.Yellow);
-            Output.PrintSummary("Processes",   analyser.Processes);
-            Output.PrintSummary("Images:",      analyser.Images);
-            Output.PrintSummary("IPs Inbound:", analyser.IpInbound);
-            Output.PrintSummary("IPs Outbound:",analyser.IpOutbound);
-            Output.PrintSummary("File Writes:", analyser.FileWrites);
+
+            if (Program.Verbose)
+            {
+                Output.PrintSummary("Processes:", analyser.Processes);
+                Output.PrintSummary("Images Loaded:", analyser.Images);
+                Output.PrintSummary("IPs Inbound:", analyser.IpInbound);
+                Output.PrintSummary("IPs Outbound:", analyser.IpOutbound);
+                Output.PrintSummary("Domain Queries:", analyser.DnsQueries);
+                Output.PrintSummary("WMI Queries:", analyser.WmiQueries);
+                Output.PrintSummary("Drivers Loaded:", analyser.DriversLoaded);
+                Output.PrintSummary("Services Installed:", analyser.ServicesInstalled);
+                Output.PrintSummary("Scheduled Tasks:", analyser.TasksRegistered);
+                Output.PrintSummary("Pipes Created:", analyser.PipesCreated);
+                Output.PrintSummary("File Writes:", analyser.FileWrites);
+                Output.PrintSummary("File Reads:", analyser.FileReads);
+                Output.PrintSummary("File Deletes:", analyser.FileDeletes);
+                Output.PrintSummary("Registry Keys Created:", analyser.RegistryCreates);
+                Output.PrintSummary("Registry Keys Opened:", analyser.RegistryOpens);
+                Output.PrintSummary("Registry Keys Deleted:", analyser.RegistryDeletes);
+                Output.PrintSummary("Registry Values Set:", analyser.RegistrySetValues);
+                Output.PrintSummary("Registry Values Deleted:", analyser.RegistryDeleteValues);
+            }
+            else
+            {
+                Output.PrintSummary("Processes:", analyser.Processes);
+                Output.PrintSummary("Images Loaded:", analyser.Images);
+                Output.PrintSummary("Drivers Loaded:", analyser.DriversLoaded);
+                Output.PrintSummary("Services Installed:", analyser.ServicesInstalled);
+                Output.PrintSummary("Scheduled Tasks:", analyser.TasksRegistered);
+                Output.PrintSummary("Pipes Created:", analyser.PipesCreated);
+                Output.PrintSummary("IPs Inbound:", analyser.IpInbound);
+                Output.PrintSummary("IPs Outbound:", analyser.IpOutbound);
+                Output.PrintSummary("Domains Queries:", analyser.DnsQueries);
+                Output.PrintSummary("File Writes:", analyser.FileWrites);
+                Output.PrintSummary("Registry Keys Created:", analyser.RegistryCreates);
+                Output.PrintSummary("Registry Values Set:", analyser.RegistrySetValues);
+
+            }
         }
+
 
         public static void CleanUpExecution(int top)
         {

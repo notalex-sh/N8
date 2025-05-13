@@ -39,4 +39,10 @@ namespace N8.Constants
 
 
     }
+    
+    public static class Guids
+    {
+        // Dns client etw provider
+        public static readonly Guid DnsClientProvider = new Guid("9A280AC0-11B2-4A7C-855E-606449A9F473");
+    }
 }
