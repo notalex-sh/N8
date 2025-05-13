@@ -38,6 +38,8 @@ namespace N8
             controller.Start(Target)
                 .GetAwaiter()
                 .GetResult();
+
+            Console.WriteLine("\nDone!");
         }
     }
 }

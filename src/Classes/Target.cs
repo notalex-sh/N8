@@ -5,7 +5,7 @@ using N8.Utilities;
 
 namespace N8.Classes
 {
-    // The target executable to be analysed
+    // the target executable to be analysed
     public class Target
     {
         public string? path { get; set; }

@@ -1,20 +1,21 @@
-using N8.Classes;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
+using System.IO;
 
 namespace N8.Lists
 {
-    // Track files written to by monitored processes
+    // track files written to by monitored processes
     public static class TrackedFiles
     {
-        public static Dictionary<string, FileNode> FileList { get; } = new Dictionary<string, FileNode>();
-        public static HashSet<string> PathList { get; set; } = new HashSet<string>();
+        public static ConcurrentDictionary<string, byte> PathList { get; set; } = new ConcurrentDictionary<string, byte>();
 
-        public static void Add(FileNode newFile)
+        public static void Add(string FilePath)
         {
-#pragma warning disable CS8604 // Possible null reference argument.
-            PathList.Add(newFile.path);
-            FileList.Add(newFile.path, newFile);
-#pragma warning restore CS8604 // Possible null reference argument.
+            PathList[FilePath] = 0;
+        }
+
+        public static string GetFileName(string FilePath)
+        {
+            return GetFileName(FilePath);
         }
 
     }

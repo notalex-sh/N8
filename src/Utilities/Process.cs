@@ -1,8 +1,4 @@
-using System;
-using System.Diagnostics;
-using System.IO;
 using System.Runtime.InteropServices;
-using N8.Classes;
 using N8.Win;
 using N8.Constants;
 
@@ -29,11 +25,13 @@ namespace N8.Utilities
                     Privileges = new WinAPI.LUID_AND_ATTRIBUTES[1]
                 };
 
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type blah blah.
                 if (!WinAPI.LookupPrivilegeValue(null, "SeIncreaseQuotaPrivilege", ref tkp.Privileges[0].Luid))
                 {
                     int errorCode = Marshal.GetLastWin32Error();
                     throw new Exception($"Failed to lookup privilege value, error code: {errorCode}");
                 }
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
                 tkp.Privileges[0].Attributes = TokenPrivileges.SePrivilegeEnabled;
 
@@ -51,7 +49,7 @@ namespace N8.Utilities
         }
 
         // spawn target proc with user priviledge
-        public static int StartProcess(FileNode rootFile)
+        public static int StartProcess(string FilePath)
         {
             EnableSeIncreaseQuotaPrivilege();
             IntPtr shellWnd = WinAPI.GetShellWindow();
@@ -89,9 +87,7 @@ namespace N8.Utilities
             startupInfo.cb = Marshal.SizeOf(startupInfo);
             WinAPI.PROCESS_INFORMATION processInfo;
 
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-            string rootPath = rootFile.path;
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+            string rootPath = FilePath;
             string commandLine = $"{rootPath}";
 
             // Determine the working directory.

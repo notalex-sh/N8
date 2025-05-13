@@ -21,53 +21,97 @@ class Program
     {
         Console.WriteLine("Parent: launching child process...");
 
-        // Get the path to our own EXE
+        // Path to our own EXE
         var exePath = Process.GetCurrentProcess().MainModule!.FileName!;
 
         // Start a new instance of ourselves with the "child" arg
         var startInfo = new ProcessStartInfo(exePath, "child")
         {
             UseShellExecute = false,
-            // inherit the same console window so child can ReadLine() here
             RedirectStandardOutput = false,
-            RedirectStandardError  = false
+            RedirectStandardError = false
         };
 
         using var child = Process.Start(startInfo);
-
         if (child == null)
         {
             Console.WriteLine("Parent: failed to start child.");
             return;
         }
 
-        // Wait until the child exits (i.e. after you press Enter in it)
+        // Wait until the child exits
         child.WaitForExit();
-
         Console.WriteLine("Parent: child has exited. Check your Downloads folder.");
     }
 
     static void RunAsChild()
     {
-        Console.WriteLine("Child: started. Press Enter to continue…");
+        Console.WriteLine("Child: started. Press Enter to curl the site…");
         Console.ReadLine();
 
-        // Determine the Downloads folder (Windows 8+ or fallback)
-        string downloads =
-        Path.Combine(
+        // Prepare the ProcessStartInfo
+        var psi = new ProcessStartInfo("curl", "https://example.com")
+        {
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = true
+        };
+
+        var output = new StringWriter();
+        var error = new StringWriter();
+
+        using (var proc = new Process { StartInfo = psi, EnableRaisingEvents = true })
+        {
+            // Hook up the async callbacks
+            proc.OutputDataReceived += (s, e) =>
+            {
+                if (e.Data != null) output.WriteLine(e.Data);
+            };
+            proc.ErrorDataReceived += (s, e) =>
+            {
+                if (e.Data != null) error.WriteLine(e.Data);
+            };
+
+            // Start process *before* beginning read
+            proc.Start();
+
+            // Tell .NET to begin pumping those streams
+            proc.BeginOutputReadLine();
+            proc.BeginErrorReadLine();
+
+            // Wait for curl to exit AND for the async readers to drain
+            proc.WaitForExit();
+            // There's an overload that ensures async handlers are flushed:
+            proc.WaitForExit(5000);  // optional timeout for safety
+
+            // Now you can access full buffers
+            string html = output.ToString();
+            string stderr = error.ToString();
+
+            // Print out the first 200 chars for brevity
+            Console.WriteLine(html.Length > 200
+                ? html.Substring(0, 200) + "…"
+                : html);
+
+            if (!string.IsNullOrEmpty(stderr))
+            {
+                Console.WriteLine("curl stderr:");
+                Console.WriteLine(stderr);
+            }
+
+            Console.WriteLine($"Child: curl exited with code {proc.ExitCode}");
+        }
+
+        // 2) Continue with the original file-write logic
+        string downloads = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             "Downloads"
         );
-        if (string.IsNullOrEmpty(downloads))
-            downloads = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
-                "Downloads");
-
-        // Write the output file
         string outPath = Path.Combine(downloads, "child_output.txt");
         File.WriteAllText(outPath,
             $"Child ran at {DateTime.Now:O}");
-
         Console.WriteLine($"Child: wrote file to {outPath}");
     }
+
 }

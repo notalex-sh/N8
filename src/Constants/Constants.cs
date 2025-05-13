@@ -17,7 +17,7 @@ namespace N8.Constants
         public const uint Query = 0x0008;
         public const uint AdjustDefault = 0x0080;
         public const uint AdjustSessionID = 0x0100;
-        public const int AssignPrimaryToken = 1; // Token type for primary tokens
+        public const int AssignPrimaryToken = 1; // token type for primary tokens
         public const int SePrivilegeEnabled = 0x00000002;
     }
     public static class ApplicationInformation

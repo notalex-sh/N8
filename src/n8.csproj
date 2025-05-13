@@ -10,8 +10,13 @@
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Microsoft.Diagnostics.Tracing.TraceEvent" Version="3.1.19" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Management" Version="9.0.3" />
   </ItemGroup>
+   <!--<ItemGroup>
+    <Reference Include="Microsoft.Diagnostics.Tracing.TraceEvent">
+      <HintPath>..\lib\Microsoft.Diagnostics.Tracing.TraceEvent.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>-->
 
 </Project>

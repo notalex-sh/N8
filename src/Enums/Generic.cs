@@ -11,5 +11,20 @@ namespace N8.Enums
             High = 0x3000,
             System = 0x4000
         }
+
+        public enum EventTypes
+        {
+            // event types to be processed
+            ProcessStart,
+            ProcessStop,
+            FileWrite,
+            FileRead,
+            ImageLoad,
+            TcpConnect,
+            TcpSend,
+            TcpRecv,
+            UdpSend,
+            UdpRecv
+        }
     }
 }

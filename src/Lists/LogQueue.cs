@@ -12,7 +12,7 @@ namespace N8.Lists
 
         public LogQueue()
         {   
-            // Unbounded for now, might make bounded depending on performance
+            // TODO unbounded for now, might make bounded depending on performance
             LogChannel = Channel.CreateUnbounded<LogEntry>();
             LogWriter = LogChannel.Writer;
             LogReader = LogChannel.Reader;
