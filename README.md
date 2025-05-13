@@ -91,3 +91,5 @@ The program starts the ETW session, launches your target, waits for it (and any 
 - [ ] Policy file for alerts on sensitive activity
 - [ ] Make my code gooder
 - [ ] other stuff i forgot about
+- [ ] maybe make some sort of agent/listener setup
+- [ ] behavioural analysis?
