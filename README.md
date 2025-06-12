@@ -85,6 +85,7 @@ The program starts the ETW session, launches your target, waits for it (and any 
 
 ## TODO
 - [ ] Output file
+- [ ] Just realised the file writes arent being recorded :o
 - [ ] Spawn process with command line type args to allow scripts etc to be sandboxed
 - [ ] Capture command line args
 - [ ] Capture process + file integrity
